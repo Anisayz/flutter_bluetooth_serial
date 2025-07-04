@@ -1,6 +1,6 @@
 android {
     compileSdkVersion 35
-    buildToolsVersion '30.0.3'
+   
 
  
     namespace 'com.Anisayz.flutter_bluetooth_serial'
