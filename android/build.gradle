@@ -51,11 +51,12 @@ repositories {
     google()
     mavenCentral()
 }
-
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.core:core:1.10.1' // Avoids lStar error
+    implementation 'androidx.core:core:1.10.1' // ✅ compatible with API 34
+    implementation 'androidx.core:core-ktx:1.10.1' // ✅ use ktx version compatible with 34
 }
+
 
 configurations.all {
     resolutionStrategy {
