@@ -1,11 +1,29 @@
+group 'io.github.edufolly.flutterbluetoothserial'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'
+    }
+}
+
+apply plugin: 'com.android.library'
+
 android {
-    compileSdkVersion 34  // ← Must be at least 31 to fix lStar issue
+    compileSdkVersion 35
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
+
+ 
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -16,5 +34,31 @@ android {
         disable 'InvalidPackage'
     }
 
-    buildToolsVersion '34.0.0'  // Make sure you installed this via SDK Manager
+    // Fix potential resource conflict (optional safeguard)
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core:1.10.1' // Avoids lStar error
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.10.1'
+    }
 }
